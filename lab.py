@@ -52,6 +52,8 @@ def dfs(graph: Dict[int, List[int]]) -> List[int]:
     :rtype: list(int)
     :param graph:  dict(key=int, value=list(int))
     :return: dfs-result
+    >>> dfs({0: [2, 5, 7], 1: [2, 6, 7], 2: [0, 1, 4, 5, 6, 7], 3: [6, 7], 4: [2, 5, 7], 5: [0, 2, 4, 7], 6: [1, 2, 3, 7], 7: [0, 1, 2, 3, 4, 5, 6]})
+    [0, 2, 1, 6, 3, 7, 4, 5]
     """
     # Your code goes here(delete "pass" keyword)
     pass
@@ -63,7 +65,8 @@ def calc_pow(graph: Dict[int, List[int]]) -> Dict[int, int]:
     :rtype: dict(key=int, value=int)
     :param graph: dict(key=int, value=list(int))
     :return: vertices and their powers
-
+    >>> calc_pow({1:[2,3], 2:[1, 3], 3: [], 4: [1]})
+    {1: 2, 2: 2, 3: 0, 4: 1}
     """
     # Your code goes here(delete "pass" keyword)
     pass
@@ -82,6 +85,16 @@ def find_path(n: int, edges: List[List[int]], source: int, destination: int) -> 
     :param source: int
     :param destination: int
     :return:
+    >>> find_path(9, [[1, 2], [3, 4], [5, 6], [7, 8], [2, 4], [3, 5], [4, 5]], 1, 5)
+    True
+    >>> find_path(9, [[1, 2], [3, 4], [5, 6], [7, 8], [2, 2], [3, 5], [4, 5]], 1, 5)
+    False
     """
     # Your code goes here(delete "pass" keyword)
     pass
+
+
+
+if __name__ == "__main__":
+    import doctest
+    print(doctest.testmod())
