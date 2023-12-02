@@ -42,6 +42,7 @@ def bfs(graph: Dict[int, List[int]]) -> List[int]:
         for neighbour in graph[vertice]:
             if neighbour not in visited:
                 q.put(neighbour)
+                visited.add(neighbour)
     return result
 
 
