@@ -17,11 +17,22 @@ def read_csv(file_name: str) -> Dict[int, List[int]]:
     >>> read_csv("graph.csv")
     {0: [2, 5, 7], 1: [2, 6, 7], 2: [0, 1, 4, 5, 6, 7], 3: [6, 7], 4: [2, 5, 7], 5: [0, 2, 4, 7], 6: [1, 2, 3, 7], 7: [0, 1, 2, 3, 4, 5, 6]}
     """
-    # Your code goes here(delete "pass" keyword)
-    pass
+    key = 0
+    dict = {}
+    num_list = []
+    with open(file_name, 'r', encoding='utf-8') as csv_file:
+        for line in csv_file:
+            line = line.strip().split(',')
+            for i, num in enumerate(line):
+                if num == '1':
+                    num_list.append(i)
+            dict[key] = num_list
+            key+=1
+            num_list=[]
+    return dict
 
 
-def bfs(graph: Dict[int, List[int]]) -> List[int]:
+def bfs(graph: Dict[int, List[int]], start_point: int = SEARCH_START_POINT) -> List[int]:
     """
     perform bfs on the graph and store its result
     in the list of vertices(integers that represent vertices)
@@ -46,7 +57,7 @@ def bfs(graph: Dict[int, List[int]]) -> List[int]:
     return result
 
 
-def dfs(graph: Dict[int, List[int]]) -> List[int]:
+def dfs(graph: Dict[int, List[int]], result:List[int] = [], start_point:int = SEARCH_START_POINT, visited:set = set()) -> List[int]:
     """
     perform dfs on the graph and store its result
     in the list of vertices(integers that represent vertices)
@@ -56,8 +67,14 @@ def dfs(graph: Dict[int, List[int]]) -> List[int]:
     >>> dfs({0: [2, 5, 7], 1: [2, 6, 7], 2: [0, 1, 4, 5, 6, 7], 3: [6, 7], 4: [2, 5, 7], 5: [0, 2, 4, 7], 6: [1, 2, 3, 7], 7: [0, 1, 2, 3, 4, 5, 6]})
     [0, 2, 1, 6, 3, 7, 4, 5]
     """
-    # Your code goes here(delete "pass" keyword)
-    pass
+    result.append(start_point)
+    visited.add(start_point)
+    for neighbour in graph[start_point]:
+        if neighbour not in visited:
+            visited.add(neighbour)
+            dfs(graph, result, neighbour, visited)
+    return result
+
 
 
 def calc_pow(graph: Dict[int, List[int]]) -> Dict[int, int]:
@@ -69,8 +86,11 @@ def calc_pow(graph: Dict[int, List[int]]) -> Dict[int, int]:
     >>> calc_pow({1:[2,3], 2:[1, 3], 3: [], 4: [1]})
     {1: 2, 2: 2, 3: 0, 4: 1}
     """
-    # Your code goes here(delete "pass" keyword)
-    pass
+    dict = {}
+    for key in graph:
+        length = len(graph[key])
+        dict[key] = length
+    return dict
 
 
 def find_path(n: int, edges: List[List[int]], source: int, destination: int) -> bool:
